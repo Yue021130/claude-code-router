@@ -96,7 +96,9 @@ function windowsShortcutTargetCandidates(options: WindowsDesktopAppDiscoveryOpti
     script
   ], {
     encoding: "utf8",
-    windowsHide: true
+    windowsHide: true,
+    timeout: 3_000,
+    maxBuffer: 4 * 1024 * 1024
   });
   if (result.status !== 0) {
     return [];
@@ -246,7 +248,9 @@ function windowsAppxPackageInstallLocations(packageKeywords: string[]): string[]
     script
   ], {
     encoding: "utf8",
-    windowsHide: true
+    windowsHide: true,
+    timeout: 3_000,
+    maxBuffer: 4 * 1024 * 1024
   });
   if (result.status !== 0) {
     return [];
@@ -281,7 +285,8 @@ function windowsWhereCandidates(names: string[]): string[] {
   for (const name of names) {
     const result = spawnSync(windowsSystemCommand("where.exe"), [name], {
       encoding: "utf8",
-      windowsHide: true
+      windowsHide: true,
+      timeout: 3_000
     });
     if (result.status !== 0) {
       continue;

@@ -267,7 +267,8 @@ function findWindowsExecutablePid(executable: string): number | undefined {
     ], {
       encoding: "utf8",
       maxBuffer: 1024 * 1024,
-      windowsHide: true
+      windowsHide: true,
+      timeout: 3_000
     });
     if (result.error || result.status !== 0) {
       return undefined;
