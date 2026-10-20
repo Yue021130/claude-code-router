@@ -840,7 +840,8 @@ function pickConfig(value: Partial<AppConfig>): LoadedAppConfig {
     if (typeof gateway.host === "string" && gateway.host.trim()) {
       gatewayConfig.host = gateway.host.trim();
     }
-    const gatewayPort = readPort(gateway.port);
+    // CCR patch: 托盘设置的服务端口通过环境变量下发
+    const gatewayPort = readPort(process.env.CCR_GATEWAY_PORT) ?? readPort(gateway.port);
     if (gatewayPort) {
       gatewayConfig.port = gatewayPort;
     }
